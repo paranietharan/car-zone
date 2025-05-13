@@ -13,6 +13,13 @@ type Engine struct {
 	CarRange      int64     `json:"car_range"`
 }
 
+type EngineRequest struct {
+	EngineID      uuid.UUID `json:"id"`
+	Displacement  int64     `json:"displacement"`
+	NoOfCylinders int64     `json:"no_of_cylinders"`
+	CarRange      int64     `json:"car_range"`
+}
+
 func validateEngine(engine Engine) error {
 	if engine.EngineID == uuid.Nil {
 		return fmt.Errorf("engine ID cannot be empty")
