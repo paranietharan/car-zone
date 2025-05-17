@@ -40,11 +40,11 @@ func (e *EngineService) UpdateEngine(ctx context.Context, id string, engineReq m
 	return engine, nil
 }
 
-func (e *EngineService) DeleteEngine(ctx context.Context, id string) error {
+func (e *EngineService) EngineDelete(ctx context.Context, id string) (models.Engine, error) {
 
-	err := e.store.DeleteEngine(ctx, id)
+	engine, err := e.store.EngineDelete(ctx, id)
 	if err != nil {
-		return err
+		return models.Engine{}, err
 	}
-	return nil
+	return engine, nil
 }
