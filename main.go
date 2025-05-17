@@ -3,6 +3,8 @@ package main
 import (
 	"car-zone/driver"
 	"fmt"
+	"net/http"
+	"os"
 
 	carService "car-zone/service/car"
 	carStore "car-zone/store/car"
@@ -13,6 +15,7 @@ import (
 	carHandler "car-zone/handler/car"
 	engineHandler "car-zone/handler/engine"
 
+	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 )
 
@@ -42,4 +45,27 @@ func main() {
 	carHandler := carHandler.NewCarHandler(carService)
 	engineHandler := engineHandler.NewEngineHandler(engineService)
 
+	router := mux.NewRouter()
+
+	router.HandleFunc("/api/cars", carHandler.CreateCar).Methods("POST")
+	router.HandleFunc("/api/cars/{id}", carHandler.GetCarByID).Methods("GET")
+	router.HandleFunc("/api/cars/{id}", carHandler.UpdateCar).Methods("PUT")
+	router.HandleFunc("/api/cars/{id}", carHandler.DeleteCar).Methods("DELETE")
+	router.HandleFunc("/api/cars/brand/{brand}", carHandler.GetCarByBrand).Methods("GET")
+
+	router.HandleFunc("/api/engines", engineHandler.CreateEngine).Methods("POST")
+	router.HandleFunc("/api/engines/{id}", engineHandler.GetEngineByID).Methods("GET")
+	router.HandleFunc("/api/engines/{id}", engineHandler.UpdateEngine).Methods("PUT")
+	router.HandleFunc("/api/engines/{id}", engineHandler.DeleteEngine).Methods("DELETE")
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080" // Default port if not specified in .env
+	}
+
+	fmt.Printf("Server is running on port %s\n", port)
+	if err := http.ListenAndServe(":"+port, router); err != nil {
+		fmt.Printf("Error starting server: %v\n", err)
+		os.Exit(1)
+	}
 }
