@@ -2,6 +2,7 @@ package main
 
 import (
 	"car-zone/driver"
+	"database/sql"
 	"fmt"
 	"net/http"
 	"os"
@@ -47,6 +48,12 @@ func main() {
 
 	router := mux.NewRouter()
 
+	schemaFile := "store/schema.sql"
+	if err := executeSchemaFile(db, schemaFile); err != nil {
+		fmt.Printf("Error executing schema file: %v\n", err)
+		return
+	}
+
 	router.HandleFunc("/api/cars", carHandler.CreateCar).Methods("POST")
 	router.HandleFunc("/api/cars/{id}", carHandler.GetCarByID).Methods("GET")
 	router.HandleFunc("/api/cars/{id}", carHandler.UpdateCar).Methods("PUT")
@@ -68,4 +75,18 @@ func main() {
 		fmt.Printf("Error starting server: %v\n", err)
 		os.Exit(1)
 	}
+}
+
+func executeSchemaFile(db *sql.DB, schemaFile string) error {
+	schema, err := os.ReadFile(schemaFile)
+	if err != nil {
+		return fmt.Errorf("failed to read schema file: %w", err)
+	}
+
+	_, err = db.Exec(string(schema))
+	if err != nil {
+		return fmt.Errorf("failed to execute schema: %w", err)
+	}
+
+	return nil
 }
