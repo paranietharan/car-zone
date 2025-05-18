@@ -5,6 +5,7 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"fmt"
 	"time"
 
 	"github.com/google/uuid"
@@ -127,6 +128,7 @@ func (s Store) CreateCar(ctx context.Context, carReq models.CarRequest) (models.
 	var createdCar models.Car
 	var engineID uuid.UUID
 
+	fmt.Println("Received engine_id:", carReq.Engine.EngineID)
 	err := s.db.QueryRowContext(
 		ctx,
 		"SELECT id FROM engine WHERE id = $1",

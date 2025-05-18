@@ -6,6 +6,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 type CarHandler struct {
@@ -20,7 +22,8 @@ func NewCarHandler(service service.CarServiceInterface) *CarHandler {
 
 func (h *CarHandler) GetCarByID(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	id := r.URL.Query().Get("id")
+	vars := mux.Vars(r)
+	id := vars["id"]
 
 	car, err := h.service.GetCarByID(ctx, id)
 	if err != nil {
@@ -73,7 +76,8 @@ func (h *CarHandler) CreateCar(w http.ResponseWriter, r *http.Request) {
 
 func (h *CarHandler) UpdateCar(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	id := r.URL.Query().Get("id")
+	vars := mux.Vars(r)
+	id := vars["id"]
 	var carReq models.Car
 
 	if err := json.NewDecoder(r.Body).Decode(&carReq); err != nil {
@@ -103,7 +107,8 @@ func (h *CarHandler) UpdateCar(w http.ResponseWriter, r *http.Request) {
 
 func (h *CarHandler) DeleteCar(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	id := r.URL.Query().Get("id")
+	vars := mux.Vars(r)
+	id := vars["id"]
 
 	err := h.service.DeleteCar(ctx, id)
 	if err != nil {
@@ -116,7 +121,8 @@ func (h *CarHandler) DeleteCar(w http.ResponseWriter, r *http.Request) {
 
 func (h *CarHandler) GetCarByBrand(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	brand := r.URL.Query().Get("brand")
+	vars := mux.Vars(r)
+	brand := vars["brand"]
 
 	cars, err := h.service.GetCarByBrand(ctx, brand)
 	if err != nil {

@@ -6,6 +6,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 type EngineHandler struct {
@@ -20,7 +22,8 @@ func NewEngineHandler(service service.EngineServiceInterface) *EngineHandler {
 
 func (h *EngineHandler) GetEngineByID(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	id := r.URL.Query().Get("id")
+	vars := mux.Vars(r)
+	id := vars["id"]
 
 	engine, err := h.service.GetEngineByID(ctx, id)
 	if err != nil {
@@ -73,7 +76,8 @@ func (h *EngineHandler) CreateEngine(w http.ResponseWriter, r *http.Request) {
 
 func (h *EngineHandler) UpdateEngine(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	id := r.URL.Query().Get("id")
+	vars := mux.Vars(r)
+	id := vars["id"]
 	var engineReq models.EngineRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&engineReq); err != nil {
@@ -103,7 +107,8 @@ func (h *EngineHandler) UpdateEngine(w http.ResponseWriter, r *http.Request) {
 
 func (h *EngineHandler) DeleteEngine(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	id := r.URL.Query().Get("id")
+	vars := mux.Vars(r)
+	id := vars["id"]
 
 	_, err := h.service.EngineDelete(ctx, id)
 	if err != nil {
