@@ -1,0 +1,287 @@
+{
+	"info": {
+		"_postman_id": "3a89c0ab-79b2-4acf-90d8-23d1e4fe69b7",
+		"name": "car-zone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45013601",
+		"_collection_link": "https://paranietharan-8338702.postman.co/workspace/Paranietharan's-Workspace~465204ea-39fb-4b44-8dbc-7865ac352c7a/collection/45013601-3a89c0ab-79b2-4acf-90d8-23d1e4fe69b7?action=share&source=collection_link&creator=45013601"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"admin\",\r\n  \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add engine details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDc2NDU0MTMsInVzZXJuYW1lIjoiYWRtaW4ifQ.U0R_-azAvqH_LJI1qZ0rFkL3dLkq1GJgtkuE2raKel0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"00000000-0000-0000-0000-000000000001\",\r\n  \"displacement\": 2000,\r\n  \"no_of_cylinders\": 4,\r\n  \"car_range\": 500\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/engines",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"engines"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get engine",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDc2NDU0MTMsInVzZXJuYW1lIjoiYWRtaW4ifQ.U0R_-azAvqH_LJI1qZ0rFkL3dLkq1GJgtkuE2raKel0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/engines/c5bde4a9-18da-49af-bd5a-2d5f4861fa4d",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"engines",
+						"c5bde4a9-18da-49af-bd5a-2d5f4861fa4d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit engine details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDc2NDU0MTMsInVzZXJuYW1lIjoiYWRtaW4ifQ.U0R_-azAvqH_LJI1qZ0rFkL3dLkq1GJgtkuE2raKel0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"displacement\": 2500,\r\n  \"no_of_cylinders\": 6,\r\n  \"car_range\": 600\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/engines/c5bde4a9-18da-49af-bd5a-2d5f4861fa4d",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"engines",
+						"c5bde4a9-18da-49af-bd5a-2d5f4861fa4d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create car",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDc2NDU0MTMsInVzZXJuYW1lIjoiYWRtaW4ifQ.U0R_-azAvqH_LJI1qZ0rFkL3dLkq1GJgtkuE2raKel0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Corolla\",\r\n  \"year\": \"2022\",\r\n  \"brand\": \"Toyota\",\r\n  \"fuel_type\": \"Petrol\",\r\n  \"engine\": {\r\n    \"id\": \"c5bde4a9-18da-49af-bd5a-2d5f4861fa4d\"\r\n  },\r\n  \"price\": 20000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/cars",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit car",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDc2NDU0MTMsInVzZXJuYW1lIjoiYWRtaW4ifQ.U0R_-azAvqH_LJI1qZ0rFkL3dLkq1GJgtkuE2raKel0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Camry\",\r\n  \"year\": \"2024\",\r\n  \"brand\": \"Toyota\",\r\n  \"fuel_type\": \"Hybrid\",\r\n  \"engine\": {\r\n    \"id\": \"c5bde4a9-18da-49af-bd5a-2d5f4861fa4d\"\r\n  },\r\n  \"price\": 32000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/cars/5589901c-266b-4fe1-9013-5094f356939d",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cars",
+						"5589901c-266b-4fe1-9013-5094f356939d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get car",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDc2NDU0MTMsInVzZXJuYW1lIjoiYWRtaW4ifQ.U0R_-azAvqH_LJI1qZ0rFkL3dLkq1GJgtkuE2raKel0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/cars/5589901c-266b-4fe1-9013-5094f356939d",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cars",
+						"5589901c-266b-4fe1-9013-5094f356939d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get car by brand",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDc2NDU0MTMsInVzZXJuYW1lIjoiYWRtaW4ifQ.U0R_-azAvqH_LJI1qZ0rFkL3dLkq1GJgtkuE2raKel0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/cars/brand/Toyota",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cars",
+						"brand",
+						"Toyota"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
